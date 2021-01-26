@@ -1,7 +1,13 @@
 from rest_framework import serializers
-from MedicalStoreApp.models import Company
+from MedicalStoreApp.models import Company, CompanyBank
+
 
 class CompanySerliazer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Company
-        fields = ["name", "license_no", "address", "contact_no", "email", "description"]
+        fields = "__all__"
+
+class CompanyBankSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CompanyBank
+        fields = "__all__"
