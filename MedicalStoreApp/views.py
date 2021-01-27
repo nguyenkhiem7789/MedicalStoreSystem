@@ -77,12 +77,24 @@ class CompanyBankViewSet(viewsets.ViewSet):
     def list(self, request):
         companybank = CompanyBank.objects.all()
         serializer = CompanyBankSerializer(companybank, many=True, context={"request": request})
-        response_dict = {"error": False, "message": "All Company Bank List Data", "data": serializer.data}
-        return Response(response_dict)
+        dict_response = {"error": False, "message": "All Company Bank List Data", "data": serializer.data}
+        return Response(dict_response)
 
+    def retrieve(self, request, pk=None):
+        querySet = CompanyBank.objects.all()
+        companybank = get_object_or_404(querySet, pk=pk)
+        serializer = CompanyBankSerializer(companybank, context={"request": request})
+        return Response({"error": False, "message": "Single Data Fetch", "data": serializer.data})
+
+    def update(self, request, pk=None):
+        querySet = CompanyBank.objects.all()
+        companybank = get_object_or_404(querySet, pk=pk)
+        serializer = CompanyBankSerializer(companybank, data=request.data, context={"request": request})
+        serializer.is_valid()
+        serializer.save()
+        return Response({"error": False, "message": "Data Has Been Updated"})
 
 company_list = CompanyViewSet.as_view({"get": "list"})
 company_create = CompanyViewSet.as_view({"post": "create"})
 company_update = CompanyViewSet.as_view({"put": "update"})
-
 companybank_create = CompanyViewSet.as_view({"post": "create"})
