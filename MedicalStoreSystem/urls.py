@@ -19,14 +19,17 @@ from rest_framework import routers
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from MedicalStoreApp import views
+from MedicalStoreApp.views import CompanyNameViewSet
 
 router = routers.DefaultRouter()
 router.register("company", views.CompanyViewSet, basename="company")
 router.register("companybank", views.CompanyBankViewSet, basename="companybank")
+router.register("medicine", views.MedicineViewSet, basename="medicine")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('api/gettoken/', TokenObtainPairView.as_view(), name="gettoken"),
-    path('api/refresh_token/', TokenObtainPairView.as_view(), name="refresh_token")
+    path('api/login/', TokenObtainPairView.as_view(), name="login"),
+    path('api/refresh_token/', TokenObtainPairView.as_view(), name="refresh_token"),
+    path('api/companybyname/<str:name>', CompanyNameViewSet.as_view(), name="companybyname"),
 ]
