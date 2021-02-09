@@ -26,6 +26,7 @@ class Medicine(models.Model):
     batch_no = models.CharField(max_length=255)
     shelf_no = models.CharField(max_length=255)
     expire_date = models.DateField()
+    mfg_date = models.DateField()
     company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
     description = models.CharField(max_length=255)
     in_stock_total = models.IntegerField()
