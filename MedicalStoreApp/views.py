@@ -43,6 +43,18 @@ class CompanyViewSet(viewsets.ModelViewSet):
             }
         return Response(dict_response)
 
+    def retrieve(self, request, pk=None):
+        querySet = Company.objects.all()
+        company = get_object_or_404(querySet, pk=pk)
+        serializer = CompanySerializer(company, context={"request": request})
+
+        serializer_data = serializer.data
+        # Accessing All the Company bank details of current company id
+        company_bank_details = CompanyBank.objects.filter(company_id=serializer_data["id"])
+        companybank_details_serializers = CompanyBankSerializer(company_bank_details, many=True)
+        serializer_data["company_bank"] = companybank_details_serializers.data
+        return Response({"error": False, "message": "Single Data Fetch", "data": serializer_data})
+
     def update(self, request, pk=None):
         try:
             queryset = Company.objects.all()

@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a029548b-0a56-4445-b479-530bcff9d1a0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MedicalStoreApp/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/MedicalStoreApp/apps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MedicalStoreApp/migrations/0001_changed_my_model.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MedicalStoreApp/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MedicalStoreSystem/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/MedicalStoreSystem/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MedicalStoreApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/MedicalStoreApp/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MedicalStoreSystem/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/MedicalStoreSystem/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,6 +80,7 @@
       <workItem from="1611624009714" duration="884000" />
       <workItem from="1611624908472" duration="200000" />
       <workItem from="1612919803819" duration="12268000" />
+      <workItem from="1613597765342" duration="898000" />
     </task>
     <servers />
   </component>
@@ -100,5 +97,17 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/MedicalStoreApp/models.py</url>
+          <line>11</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
