@@ -108,11 +108,20 @@ class CompanyBankViewSet(viewsets.ViewSet):
         serializer.save()
         return Response({"error": False, "message": "Data Has Been Updated"})
 
+
 class CompanyNameViewSet(generics.ListAPIView):
     serializer_class = CompanySerializer
+
     def get_queryset(self):
         name = self.kwargs["name"]
         return Company.objects.filter(name=name)
+
+
+class CompanyOnlyViewSet(generics.ListAPIView):
+    serializer_class = CompanySerializer
+
+    def get_queryset(self):
+        return Company.objects.all()
 
 
 class MedicineViewSet(viewsets.ViewSet):
