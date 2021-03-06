@@ -186,6 +186,24 @@ class MedicineViewSet(viewsets.ViewSet):
         serializer = MedicineSerializer(medicine, data=request.data, context={"request": request})
         serializer.is_valid()
         serializer.save()
+        for salt_detail in request.data["medicine_details"]:
+            if salt_detail["id"] == 0:
+                # For insert new salt details
+                print("ADD")
+                del salt_detail["id"]
+                serializer2 = MedicalDetailsSerializer(data=salt_detail, context={"request": request})
+                serializer2.is_valid()
+                serializer2.save()
+            else:
+                # For update salt details
+                querySet2 = MedicalDetails.objects.all()
+                medicine_salf = get_object_or_404(querySet2, pk=salt_detail["id"])
+                del salt_detail["id"]
+                serializer3 = MedicalDetailsSerializer(medicine_salf, data=salt_detail,context={"request": request})
+                serializer3.is_valid()
+                serializer3.save()
+                print("UPDATE")
+
         return Response({"error": False, "message": "Data Has Been Updated"})
 
 
