@@ -7,9 +7,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
-from MedicalStoreApp.models import Company, CompanyBank, Medicine, MedicalDetails
+from MedicalStoreApp.models import Company, CompanyBank, Medicine, MedicalDetails, CompanyAccount, Employee
 from MedicalStoreApp.serializers import CompanySerializer, CompanyBankSerializer, MedicineSerializer, \
-    MedicalDetailsSerializer, MedicalDetailsSerializerSimple
+    MedicalDetailsSerializer, MedicalDetailsSerializerSimple, CompanyAccountSerializer, EmployeeSerializer
 import logging
 
 
@@ -206,6 +206,75 @@ class MedicineViewSet(viewsets.ViewSet):
 
         return Response({"error": False, "message": "Data Has Been Updated"})
 
+# Company Account Viewset
+class CompanyAccountViewSet(viewsets.ViewSet):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def create(self, request):
+        try:
+            serializer = CompanyAccountSerializer(data=request.data, context={"request": request})
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            dict_response = {"error": False, "message": "Company Account Data Save Successfully"}
+        except:
+            dict_response = {"error": True, "message": "Error During Saving Company Account Data"}
+        return Response(dict_response)
+
+    def list(self, request):
+        companyAccount = CompanyAccount.objects.all()
+        serializer = CompanyAccountSerializer(companyAccount, many=True, context={"request": request})
+        dict_response = {"error": False, "message": "All Company Account List Data", "data": serializer.data}
+        return Response(dict_response)
+
+    def retrieve(self, request, pk=None):
+        querySet = CompanyBank.objects.all()
+        companyAccount = get_object_or_404(querySet, pk=pk)
+        serializer = CompanyAccountSerializer(companyAccount, context={"request": request})
+        return Response({"error": False, "message": "Single Data Fetch", "data": serializer.data})
+
+    def update(self, request, pk=None):
+        querySet = CompanyAccount.objects.all()
+        companyAccount = get_object_or_404(querySet, pk=pk)
+        serializer = CompanyAccountSerializer(companyAccount, data=request.data, context={"request": request})
+        serializer.is_valid()
+        serializer.save()
+        return Response({"error": False, "message": "Data Has Been Updated"})
+
+# Employee Account Viewset
+class EmployeeViewSet(viewsets.ViewSet):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def create(self, request):
+        try:
+            serializer = EmployeeSerializer(data=request.data, context={"request": request})
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            dict_response = {"error": False, "message": "Employee Data Save Successfully"}
+        except:
+            dict_response = {"error": True, "message": "Error During Saving Employee Data"}
+        return Response(dict_response)
+
+    def list(self, request):
+        employee = Employee.objects.all()
+        serializer = EmployeeSerializer(employee, many=True, context={"request": request})
+        dict_response = {"error": False, "message": "All Employee List Data", "data": serializer.data}
+        return Response(dict_response)
+
+    def retrieve(self, request, pk=None):
+        querySet = Employee.objects.all()
+        employee = get_object_or_404(querySet, pk=pk)
+        serializer = EmployeeSerializer(employee, context={"request": request})
+        return Response({"error": False, "message": "Single Data Fetch", "data": serializer.data})
+
+    def update(self, request, pk=None):
+        querySet = Employee.objects.all()
+        employee = get_object_or_404(querySet, pk=pk)
+        serializer = EmployeeSerializer(employee, data=request.data, context={"request": request})
+        serializer.is_valid()
+        serializer.save()
+        return Response({"error": False, "message": "Data Has Been Updated"})
 
 company_list = CompanyViewSet.as_view({"get": "list"})
 company_create = CompanyViewSet.as_view({"post": "create"})

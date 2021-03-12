@@ -108,6 +108,7 @@ class CompanyAccount(models.Model):
     transaction_amt = models.CharField(max_length=255)
     transaction_date = models.DateField()
     payment_mode = models.CharField(max_length=255)
+    added_on = models.DateTimeField(auto_now_add=True)
     objects = models.Manager()
 
 
